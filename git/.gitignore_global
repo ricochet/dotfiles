@@ -1,0 +1,9 @@
+tags
+.DS_Store
+.sass-cache
+*~
+.*.swp
+.bundle
+vendor/bundle
+Icon
+*.pyc

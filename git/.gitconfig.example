@@ -1,0 +1,10 @@
+[user]
+  name = {{ .Name }}
+  email = {{ .WorkEmail }}
+[includeIf "gitdir:~/wsl/"]
+  path = ~/wsl/.gitconfig
+[includeIf "gitdir:~/personal/"]
+  path = ~/personal/.gitconfig
+[core]
+  excludesfile = ~/.gitignore_global
+  editor = nvim

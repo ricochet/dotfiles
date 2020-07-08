@@ -1,0 +1,32 @@
+# brew bundle dump
+tap "caskroom/cask"
+tap "heroku/brew"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "thoughtbot/formulae"
+tap "universal-ctags/universal-ctags"
+
+brew "coreutils"
+brew "docker"
+brew "git"
+brew "openssl"
+brew "imagemagick"
+brew "neovim"
+brew "pyenv"
+brew "stow"
+brew "tree"
+brew "wget"
+brew "yarn"
+brew "zsh"
+brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
+brew "getantibody/tap/antibody"
+
+# Casks
+cask "docker"
+cask "firefox"
+cask "flux"
+cask "google-chrome"
+cask "gpg-suite"
+cask "iterm2"
