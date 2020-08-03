@@ -13,6 +13,12 @@ git clone https://github.com/ricochet/dotfiles ~/.dotfiles
 sudo pacman -S stow
 sudo apt-get install stow
 brew install stow
+
+# antibody
+curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
+
+# zsh
+sudo apt-get install zsh
 ```
 
 ## install

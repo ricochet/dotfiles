@@ -2,6 +2,7 @@
 # plugins managed by https://getantibody.github.io/
 
 ANTIBODY_HOME="$(antibody home)"
+ZSH="$ANTIBODY_HOME/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
 source ~/.zsh_plugins.sh
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

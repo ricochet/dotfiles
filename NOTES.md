@@ -42,3 +42,5 @@ https://github.com/microsoft/vscode-remote-try-go/blob/master/.devcontainer/devc
 add unit tests: https://github.com/techthoughts2/Catesta/blob/master/docs/Catesta-GHActions.md
 
 https://github.com/techthoughts2/Catesta/blob/master/docs/Catesta-GHActions.md
+
+automate installing git: https://www.powershellgallery.com/packages/Install-Git/1.0/Content/Install-Git.ps1

@@ -1,9 +1,4 @@
 <# 
-    automate installing git? 
-    https://www.powershellgallery.com/packages/Install-Git/1.0/Content/Install-Git.ps1
-#>
-
-<# 
     bling powershell
     https://rnelson0.com/2018/05/17/powershell-in-a-post-tls1-1-world/
     https://docs.microsoft.com/en-us/powershell/scripting/gallery/installing-psget?view=powershell-7
