@@ -55,12 +55,42 @@ alias -g NUL='&> /dev/null'
 alias -g T='| tail'
 alias -g V='|& vim -'
 
+# Map vim to nvim
+alias vim="nvim"
+alias vi="nvim"
 alias v='$EDITOR'
 alias ev='$EDITOR ~/.config/nvim/init.vim'
+alias te="exa"
 
 # Update neovim bundles
 alias nvbi="nvim +PlugInstall +qa"
 alias nvbu="nvim +PlugUpdate +qa"
+
+alias dsdelete='find . -name "*.DS_Store" -type f -delete'
+alias ll='ls -lGha $@'
+
+alias goba='nocorrect go build ./...'
+alias gota='nocorrect gotestsum'
+
+alias cdc='cd $CONVOY_ROOT'
+
+function sagew {
+   if [[ -f sage/sage.go ]]; then
+      if [[ ! -f ./build/sage || ./go.mod -nt ./build/sage ]]; then
+         echo 'Building sage.'
+         go run sage/sage.go buildSage
+      fi
+   fi
+   ./build/sage $*
+}
+
+gateway() {
+    export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')
+    export SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
+    export INGRESS_HOST=$(kubectl get po -l istio=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}')
+    export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+    echo "Istio Ingress \$GATEWAY_URL: $GATEWAY_URL"
+}
 
 # History environment variables
 HISTFILE="${HOME}/.zsh_history"
@@ -91,5 +121,6 @@ setopt INTERACTIVE_COMMENTS   # Allow comments in interactive mode
 # Hide hostname when logged in as bahaye
 DEFAULT_USER="bahaye"
 
-# Map vim to nvim
-alias vim="nvim"
+# map CAPS lock to tilda: tilde: 0x35, caps: 0x39
+# https://developer.apple.com/library/archive/technotes/tn2450/_index.html#//apple_ref/doc/uid/DTS40017618-CH1-KEY_TABLE_USAGES
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000035}]}'

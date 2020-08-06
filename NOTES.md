@@ -10,7 +10,6 @@ Access WSL filesystem from the files explorer: `\\wsl$\Ubuntu`
 # Obtain the IP address of your host machine by running this command from your Linux distribution: cat /etc/resolv.conf - Copy the IP address following the term: nameserver. - Connect to any Windows server using the copied IP address.
 # You may need to bind your application to 0.0.0.0 instead of 127.0.0.1
 ip addr | grep eth0
-
 ```
 
 ## Powerline-go in Powershell
@@ -28,10 +27,6 @@ fi
 ```
 
 ## TODO
-
-sudo apt-get update
-sudo apt-get install build-essential gdb
-sudo apt install python3 python3-pip
 
 https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync
 http://shanalikhan.github.io/2015/12/15/Visual-Studio-Code-Sync-Settings.html

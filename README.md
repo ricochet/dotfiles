@@ -6,7 +6,7 @@ With stow powered symlinks, keep dotfiles always up-to-date in your repository.
 git clone https://github.com/ricochet/dotfiles ~/.dotfiles
 ```
 
-## dependencies
+## Dependencies
 
 ```bash
 # pick your poison
@@ -21,14 +21,16 @@ curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 sudo apt-get install zsh
 ```
 
-## install
+## Install
 
 ### WSL
 
 Run through installation setup.ps1 first. It's a pain to automate, so copy commands that you
 need in an elevated powershell window.
 
-Then follow the following steps: <https://docs.docker.com/docker-for-windows/wsl/>
+Then setup docker following: <https://docs.docker.com/docker-for-windows/wsl/>
+
+Once you have WSL setup with a distro, run install.sh in that distro.
 
 ### *nix and macos
 
