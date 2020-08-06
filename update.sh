@@ -1,5 +1,5 @@
 #!/bin/bash
-stow bin git neovim personal-git ssh vim zsh
+stow git neovim personal-git ssh vim zsh
 
 # wsl
 if grep -q microsoft /proc/version; then
