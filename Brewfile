@@ -1,7 +1,7 @@
 # Created by `brew bundle dump`
 tap "adoptopenjdk/openjdk"
 tap "argoproj/tap"
-tap "caskroom/cask"
+tap "homebrew/cask-caskcaskroom/cask"
 tap "golangci/tap"
 tap "heroku/brew"
 tap "homebrew/bundle"
