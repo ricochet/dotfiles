@@ -23,8 +23,7 @@ export NODE_PATH='/usr/local/lib/node_modules'
 
 # GOLANG
 export GOPATH="${HOME}/golang"
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export PATH="$PATH:${GOPATH}/bin"
 export GOPRIVATE="*.sas.com,github.com/sas-gophers"
 export GONOSUMDB=*.sas.com
 export GOPROXY=http://goproxy.sas.com:3000

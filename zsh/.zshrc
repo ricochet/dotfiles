@@ -119,6 +119,25 @@ setopt INTERACTIVE_COMMENTS   # Allow comments in interactive mode
 # Hide hostname when logged in as bahaye
 DEFAULT_USER="bahaye"
 
-# map CAPS lock to tilda: tilde: 0x35, caps: 0x39
-# https://developer.apple.com/library/archive/technotes/tn2450/_index.html#//apple_ref/doc/uid/DTS40017618-CH1-KEY_TABLE_USAGES
-hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000035}]}'
+if command -v hidutil &> /dev/null
+then
+   # map CAPS lock to tilda: tilde: 0x35, caps: 0x39
+   # https://developer.apple.com/library/archive/technotes/tn2450/_index.html#//apple_ref/doc/uid/DTS40017618-CH1-KEY_TABLE_USAGES
+   hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000035}]}'
+fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/bahaye/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/bahaye/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/bahaye/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/bahaye/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

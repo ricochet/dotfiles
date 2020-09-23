@@ -6,11 +6,10 @@ With stow powered symlinks, keep dotfiles always up-to-date in your repository.
 git clone https://github.com/ricochet/dotfiles ~/.dotfiles
 ```
 
-## Dependencies
+## dependencies
 
 ```bash
 # pick your poison
-sudo pacman -S stow
 sudo apt-get install stow
 brew install stow
 
@@ -21,16 +20,20 @@ curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 sudo apt-get install zsh
 ```
 
-## Install
+## install
 
 ### WSL
 
 Run through installation setup.ps1 first. It's a pain to automate, so copy commands that you
 need in an elevated powershell window.
 
-Then setup docker following: <https://docs.docker.com/docker-for-windows/wsl/>
+Then follow the following steps: <https://docs.docker.com/docker-for-windows/wsl/>
 
-Once you have WSL setup with a distro, run install.sh in that distro.
+#### GUI in WSL
+
+- [https://wiki.ubuntu.com/WSL#Running_Graphical_Applications](Ubuntu wiki)
+- Install an X-Server like [https://sourceforge.net/projects/vcxsrv/](vcxsrv).
+- [https://github.com/cascadium/wsl-windows-toolbar-launcher#firewall-rules](Windows Defender firewall rules)
 
 ### *nix and macos
 
