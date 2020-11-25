@@ -5,6 +5,7 @@
 
 lpass sync
 
-echo "GITLAB_TOKEN=$(lpass show GITLAB_TOKEN --field=token)"  > ~/.secrets
+echo "GITLAB_TOKEN=$(lpass show GITLAB_TOKEN --field=token)" > ~/.secrets
+echo "JENKINS_TOKEN=$(lpass show JENKINS_TOKEN --field=token)" >> ~/.secrets
 
 lpass show .netrc --notes > ~/.netrc
