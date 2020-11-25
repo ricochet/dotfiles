@@ -24,8 +24,9 @@ sudo apt-get install zsh
 
 ### WSL
 
-Run through installation setup.ps1 first. It's a pain to automate, so copy commands that you
-need in an elevated powershell window.
+Run through installation [setup.ps1](./wsl/setup.ps1) first.
+It's a pain to automate, so copy commands that you need in an
+elevated powershell window.
 
 Then follow the following steps: <https://docs.docker.com/docker-for-windows/wsl/>
 

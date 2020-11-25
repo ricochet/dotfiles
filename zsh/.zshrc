@@ -126,18 +126,8 @@ then
    hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000035}]}'
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/bahaye/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/bahaye/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/bahaye/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/bahaye/anaconda3/bin:$PATH"
-    fi
+# autocompletions
+if command -v stern &> /dev/null
+then
+   source <(stern --completion=zsh)
 fi
-unset __conda_setup
-# <<< conda initialize <<<
-

@@ -2,8 +2,8 @@
 stow git neovim personal-git ssh vim zsh
 
 # wsl
-if grep -q microsoft /proc/version; then
-  stow wsl-git
+if grep -q microsoft /proc/version &> /dev/null; then
+  stow wsl
 fi
 
 # use static loading for perf
