@@ -32,9 +32,9 @@ Then follow the following steps: <https://docs.docker.com/docker-for-windows/wsl
 
 #### GUI in WSL
 
-- [https://wiki.ubuntu.com/WSL#Running_Graphical_Applications](Ubuntu wiki)
+- [Ubuntu wiki](https://wiki.ubuntu.com/WSL#Running_Graphical_Applications)
 - Install an X-Server like [https://sourceforge.net/projects/vcxsrv/](vcxsrv).
-- [https://github.com/cascadium/wsl-windows-toolbar-launcher#firewall-rules](Windows Defender firewall rules)
+- [Windows Defender firewall rules](https://github.com/cascadium/wsl-windows-toolbar-launcher#firewall-rules)
 
 ### *nix and macos
 
