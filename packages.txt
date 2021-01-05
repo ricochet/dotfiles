@@ -1,6 +1,5 @@
 build-essential
 gdb
-software-properties-common
 python-dev
 python-pip
 python3
@@ -20,3 +19,5 @@ openssh-server
 x11-apps
 libhdf5-dev
 mesa-utils
+stow
+zsh
