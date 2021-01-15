@@ -38,6 +38,9 @@ export PATH="$PATH:${CONVOY_ROOT}/sonder/build/tools/darwin"
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# kustomize
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # export known env files
 set -o allexport
 source ~/.secrets
