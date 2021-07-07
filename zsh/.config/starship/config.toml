@@ -1,0 +1,112 @@
+[directory]
+truncation_length = 30
+truncation_symbol = "…/"
+truncate_to_repo = false
+home_symbol = "~"
+style = "blue"
+read_only = " "
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+style = "green"
+
+[git_state]
+style = "yellow"
+
+[git_status]
+format = '[${modified}${conflicted}${renamed}${staged}${untracked}${ahead_behind}]($style) '
+staged = '+${count}'
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+conflicted = "=${count}"
+untracked = "?${count}"
+modified = "!${count}"
+style = "yellow"
+
+[python]
+format = "[$symbol($version )]($style)"
+pyenv_version_name = false
+pyenv_prefix = "pyenv"
+python_binary = "python3"
+style = "bold yellow"
+symbol = " "
+
+# default format is $all.
+# exclude a handful of modules so that newer modules are auto-added
+[cmake]
+disabled = true
+
+[battery]
+disabled = true
+
+[dart]
+symbol = " "
+disabled = true
+
+[crystal]
+disabled = true
+
+[vagrant]
+disabled = true
+
+# nerd font symbols
+[aws]
+symbol = "  "
+
+[conda]
+symbol = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[package]
+symbol = " "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[shlvl]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "

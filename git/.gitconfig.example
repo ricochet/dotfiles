@@ -6,5 +6,17 @@
 [includeIf "gitdir:~/personal/"]
   path = ~/personal/.gitconfig
 [core]
-  excludesfile = ~/.gitignore_global
-  editor = nvim
+    editor = vi
+    excludesfile = ~/.gitignore_global
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+    syntax-theme = Dracula
+    navigate = true

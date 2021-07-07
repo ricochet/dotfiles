@@ -1,12 +1,4 @@
 #!/bin/bash
-stow git neovim personal-git ssh vim zsh
+rust/update_rust.sh
 
-# wsl
-if grep -q microsoft /proc/version &> /dev/null; then
-  stow wsl
-fi
-
-# use static loading for perf
-# https://getantibody.github.io/
-antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
-antibody update
+sh ./sync.sh
