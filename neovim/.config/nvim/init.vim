@@ -16,7 +16,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'ryanoasis/vim-devicons'
 
 " File browser
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-webdevicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
