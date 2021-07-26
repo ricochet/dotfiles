@@ -20,3 +20,11 @@
     whitespace-error-style = 22 reverse
     syntax-theme = Dracula
     navigate = true
+[pull]
+    rebase = false
+[push]
+    default = current
+[init]
+    defaultBranch = main
+[merge]
+    ff = only
