@@ -22,7 +22,7 @@ chsh -s $(which zsh)
 curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
 
 # emsdk
-mkdir -p "$(dirname "$EMSDK_HOME")"
-git clone https://github.com/emscripten-core/emsdk.git "$EMSDK_HOME"
+mkdir -p "$(dirname "$EMSDK")"
+git clone https://github.com/emscripten-core/emsdk.git "$EMSDK"
 
 sh ./update.sh

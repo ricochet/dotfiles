@@ -92,8 +92,8 @@ source ~/memsql/.memsqlrc
 source $HOME/.cargo/env
 
 # Emscripten
-export EMSDK_HOME="$HOME/repos/oss/emscripten-core/emsdk"
-source "$EMSDK_HOME/emsdk_env.sh"
+export EMSDK="$HOME/repos/oss/emscripten-core/emsdk"
+source "$EMSDK/emsdk_env.sh"
 
 # Wasmer
 export WASMER_DIR="/home/bhayes/.wasmer"
