@@ -91,6 +91,10 @@ source ~/memsql/.memsqlrc
 # Rust
 source $HOME/.cargo/env
 
+# Emscripten
+export EMSDK_HOME="$HOME/repos/oss/emscripten-core/emsdk"
+source "$EMSDK_HOME/emsdk_env.sh"
+
 # Wasmer
 export WASMER_DIR="/home/bhayes/.wasmer"
 [ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"

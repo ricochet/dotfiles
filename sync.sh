@@ -11,3 +11,9 @@ fi
 # https://getantibody.github.io/
 antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
 antibody update
+
+pushd "$EMSDK_HOME" || exit
+git pull
+./emsdk install latest
+./emsdk activate latest
+popd || exit
