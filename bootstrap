@@ -35,13 +35,8 @@ BOOTSTRAP_SCRIPT_DIR=$(dirname ${SCRIPT})
 DOTFILES=${DOTFILES:-$HOME/.dotfiles}
 GITHUB_USER=${GITHUB_USER:-ricochet}
 
-if [ -f "${BOOTSTRAP_SCRIPT_DIR}/install.sh" ]; then
-    echo "==> Initializing dotfiles bare repo from ${BOOTSTRAP_SCRIPT_DIR}"
-    git clone --quiet --bare --no-checkout ${BOOTSTRAP_SCRIPT_DIR} ${DOTFILES}
-else
-    echo "==> Cloning dotfiles bare repo"
-    git clone --quiet --bare --no-checkout https://github.com/${GITHUB_USER}/dotfiles.git ${DOTFILES}
-fi
+echo "==> Cloning dotfiles bare repo"
+git clone --quiet --bare --no-checkout https://github.com/${GITHUB_USER}/dotfiles.git ${DOTFILES}
 
 echo "==> Configuring dotfiles repo"
 dotfiles config status.showUntrackedFiles no
