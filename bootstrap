@@ -9,9 +9,6 @@ set -eEuo pipefail
 # - https://github.blog/2020-01-17-bring-your-monorepo-down-to-size-with-sparse-checkout/
 #
 
-# Report errors
-trap 'echo $(basename $BASH_SOURCE): Error $? at line \#${LINENO}' ERR
-
 [[ -z $(type -p git) ]] && echo "==> git command not found" && exit 1
 [[ -z $(type -p curl) ]] && echo "==> curl command not found" && exit 1
 
