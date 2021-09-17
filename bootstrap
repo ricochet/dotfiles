@@ -49,8 +49,8 @@ BACKUP_DIR=${BACKUP_DIR:-$HOME/.dotfiles_backup}
 (dotfiles checkout &>/dev/null || (backup ${BACKUP_DIR} && dotfiles checkout)) || (echo "==> failed" && exit 1)
 
 echo "==> Bootstrapping tools"
-if [ -f "${BOOTSTRAP_SCRIPT_DIR}/install.sh" ]; then
-    bash ${BOOTSTRAP_SCRIPT_DIR}/install.sh
+if [ -f "${BOOTSTRAP_SCRIPT_DIR}/.dotfiles/.dotfiles/install.sh" ]; then
+    bash ${BOOTSTRAP_SCRIPT_DIR}/.dotfiles/.dotfiles/install.sh
 else
     curl -fsSL https://raw.githubusercontent.com/${GITHUB_USER}/dotfiles/main/install.sh | bash
 fi
