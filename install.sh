@@ -15,7 +15,6 @@ fi
 
 printf " - IGNORE_OMZ      = %s\n" "${IGNORE_OMZ}"
 printf " - IGNORE_BREW     = %s\n" "${IGNORE_BREW}"
-printf " - IGNORE_GIT      = %s\n" "${IGNORE_GIT}"
 
 ###
 # Rust
