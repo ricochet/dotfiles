@@ -5,7 +5,7 @@ set -eEuo pipefail
 printf "Configuration:\n"
 IGNORE_OMZ=${IGNORE_OMZ:-false}
 IGNORE_BREW=${IGNORE_BREW:-true}
-IGNORE_CODE=${IGNORE_CODE:-true}
+REMOTE_CONTAINERS=${REMOTE_CONTAINERS:-false}
 
 if [[ ${REMOTE_CONTAINERS} ]]; then
     IGNORE_OMZ=true
@@ -15,7 +15,6 @@ fi
 
 printf " - IGNORE_OMZ      = %s\n" "${IGNORE_OMZ}"
 printf " - IGNORE_BREW     = %s\n" "${IGNORE_BREW}"
-printf " - IGNORE_CODE     = %s\n" "${IGNORE_CODE}"
 printf " - IGNORE_GIT      = %s\n" "${IGNORE_GIT}"
 
 ###
