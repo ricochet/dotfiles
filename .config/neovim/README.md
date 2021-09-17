@@ -28,3 +28,4 @@ $ cp en_US.* ~/.local/share/nvim/site/spell/
 
 Then open Neovim in the `spell` directory and execute `:mkspell! en en_US 
 en_GB` to build the Neovim dictionaries.
+

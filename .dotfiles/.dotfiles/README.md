@@ -1,11 +1,21 @@
 # dotfiles
 
-With stow powered symlinks, keep dotfiles always up-to-date in your repository.
-
 ```bash
-git clone https://github.com/ricochet/dotfiles ~/.dotfiles
+# bootstrap dotfiles
+curl -fsSL https://raw.githubusercontent.com/ricochet/dotfiles/main/bootstrap | bash
+
+
+
+git clone --bare https://github.com/ricochet/dotfiles ~/.dotfiles
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+mkdir -p .dotfiles-backup && \
+dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
+xargs -I{} mv {} .dotfiles-backup/{}
+dotfiles checkout
+dotfiles config --local status.showUntrackedFiles no
 ```
 
+- Dotfiles: use a bare git repository in the user's home (no symlinks).
 - OS: Debian/Ubuntu, MacOS, Windows with WSL
 - Shell: `zsh` wih [oh-my-zsh](https://ohmyz.sh) plugins managed by [antibody](https://getantibody.github.io/) and [starship](https://starship.rs) prompt
 - Theme: Dracula
@@ -56,5 +66,5 @@ See [rust/update.sh](./rust/update.sh) for installed cargo packages. Many are dr
 
 ## References
 
-- Great [blog](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/) on how to use stow to manage dotfile repositories
+- [The best way to store your dotfiles: A bare Git repository](https://www.atlassian.com/git/tutorials/dotfiles)
 - [replacement shell commands](https://zaiste.net/posts/shell-commands-rust/)

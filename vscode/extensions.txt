@@ -1,7 +1,0 @@
-dracula-theme.theme-dracula
-eamodio.gitlens
-mauve.terraform
-ms-azuretools.vscode-docker
-ms-python.python
-ms-vscode.Go
-timonwong.shellcheck

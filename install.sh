@@ -1,28 +1,95 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# install deps
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  pushd macos || exit
-  brew bundle
-  popd || exit
-elif  ! command -v "apt-get" &> /dev/null; then
-  # software-properties-common for add-apt-repository
-  sudo apt install software-properties-common
-  sudo add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) \
-    stable"
+set -eEuo pipefail
 
-  xargs -a packages.txt sudo apt-get install -y
+printf "Configuration:\n"
+IGNORE_OMZ=${IGNORE_OMZ:-false}
+IGNORE_BREW=${IGNORE_BREW:-true}
+IGNORE_CODE=${IGNORE_CODE:-true}
+
+if [[ ${REMOTE_CONTAINERS} ]]; then
+    IGNORE_OMZ=true
+    IGNORE_BREW=true
+    IGNORE_CODE=true
 fi
 
-chsh -s $(which zsh)
+printf " - IGNORE_OMZ      = %s\n" "${IGNORE_OMZ}"
+printf " - IGNORE_BREW     = %s\n" "${IGNORE_BREW}"
+printf " - IGNORE_CODE     = %s\n" "${IGNORE_CODE}"
+printf " - IGNORE_GIT      = %s\n" "${IGNORE_GIT}"
 
-# antibody
-curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
+###
+# Rust
+###
+if ! command -v 'rustc --version' &>/dev/null; then
+    printf "\n🦀 Installing rust\n"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
 
-# emsdk
-mkdir -p "$(dirname "$EMSDK")"
-git clone https://github.com/emscripten-core/emsdk.git "$EMSDK"
+###
+# Antibody
+###
+if ! command -v 'antigen' &>/dev/null; then
+    printf "\n🚀 Installing antibody\n"
+    curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
+fi
 
-sh ./update.sh
+###
+# Starship
+###
+if [[ -z "$(which starship)" ]] ; then
+    printf "\n🚀 Installing starship\n"
+    curl -fsSL https://starship.rs/install.sh | bash -s -- -y -b ${DOTFILES_BIN} >/dev/null
+fi
+
+###
+# Essential Rust utilities
+# For more utils, see rust-update.sh
+###
+cargo install bat fd-find git-delta exa
+
+###
+# Install oh my zsh
+###
+if ! ${IGNORE_OMZ}; then
+    printf "\n🚀 Installing oh-my-zsh\n"
+    if [ -d "${HOME}/.oh-my-zsh" ]; then
+        printf "oh-my-zsh is already installed\n"
+    else
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+fi
+
+###
+# Install brew to start with
+###
+if [[ ! ${IGNORE_BREW} && "$OSTYPE" == "darwin"* ]]; then
+    printf "\n🚀 Installing brew\n"
+    
+    if [ "$(arch)" = "arm64" ]; then
+        printf "\nRunning on arm64\n"
+        if ! brew --version; then
+            sudo mkdir -p /opt/homebrew
+            sudo chown -R "$(whoami)":wheel /opt/homebrew
+            curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C /opt/homebrew
+        fi
+    else
+        printf "\nRunning on intel\n"
+        if ! brew --version; then
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
+        fi
+    fi
+    brew update
+    brew upgrade
+
+    ###
+    # Install brew packages
+    ###
+    pushd ~/.dotfiles/.dotfiles/macos || exit
+    brew bundle
+    popd || exit
+
+    # Some tidying up
+    brew autoremove
+    brew cleanup
+fi
