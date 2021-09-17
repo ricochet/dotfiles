@@ -19,7 +19,7 @@ printf " - IGNORE_BREW     = %s\n" "${IGNORE_BREW}"
 ###
 # Rust
 ###
-if ! command -v 'rustc --version' &>/dev/null; then
+if ! command -v 'rustc' &>/dev/null; then
     printf "\n🦀 Installing rust\n"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
