@@ -83,7 +83,7 @@ if [[ ! ${IGNORE_BREW} && "$OSTYPE" == "darwin"* ]]; then
     ###
     # Install brew packages
     ###
-    pushd ~/.dotfiles/.dotfiles/macos || exit
+    pushd ~/macos || exit
     brew bundle
     popd || exit
 

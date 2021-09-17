@@ -3,16 +3,6 @@
 ```bash
 # bootstrap dotfiles
 curl -fsSL https://raw.githubusercontent.com/ricochet/dotfiles/main/bootstrap | bash
-
-
-
-git clone --bare https://github.com/ricochet/dotfiles ~/.dotfiles
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-mkdir -p .dotfiles-backup && \
-dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
-xargs -I{} mv {} .dotfiles-backup/{}
-dotfiles checkout
-dotfiles config --local status.showUntrackedFiles no
 ```
 
 - Dotfiles: use a bare git repository in the user's home (no symlinks).

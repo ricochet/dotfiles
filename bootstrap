@@ -41,16 +41,27 @@ git clone --quiet --bare --no-checkout https://github.com/${GITHUB_USER}/dotfile
 echo "==> Configuring dotfiles repo"
 dotfiles config status.showUntrackedFiles no
 
-# TODO use sparse checkout to avoid cloning README and helper scripts
-# that are not dotfiles of stored in the repo.
+echo "==> Configuring dotfiles repo"
+dotfiles config status.showUntrackedFiles no
+dotfiles config --local core.sparsecheckout true
+cat <<EOF >>$DOTFILES/info/sparse-checkout
+/*
+!.devcontainer
+!.github
+!bootstrap
+!install.sh
+!README.md
+!LICENSE
+!img
+EOF
 
 echo "==> Initializing dotfiles"
 BACKUP_DIR=${BACKUP_DIR:-$HOME/.dotfiles_backup}
 (dotfiles checkout &>/dev/null || (backup ${BACKUP_DIR} && dotfiles checkout)) || (echo "==> failed" && exit 1)
 
 echo "==> Bootstrapping tools"
-if [ -f "${BOOTSTRAP_SCRIPT_DIR}/.dotfiles/.dotfiles/install.sh" ]; then
-    bash ${BOOTSTRAP_SCRIPT_DIR}/.dotfiles/.dotfiles/install.sh
+if [ -f "${BOOTSTRAP_SCRIPT_DIR}/install.sh" ]; then
+    bash ${BOOTSTRAP_SCRIPT_DIR}/install.sh
 else
     curl -fsSL https://raw.githubusercontent.com/${GITHUB_USER}/dotfiles/main/install.sh | bash
 fi
