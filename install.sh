@@ -27,7 +27,7 @@ fi
 ###
 # Antibody
 ###
-if ! command -v 'antigen' &>/dev/null; then
+if ! command -v 'antibody' &>/dev/null; then
     printf "\n🚀 Installing antibody\n"
     curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
 fi
