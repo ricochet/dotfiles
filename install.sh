@@ -16,6 +16,10 @@ fi
 printf " - IGNORE_OMZ      = %s\n" "${IGNORE_OMZ}"
 printf " - IGNORE_BREW     = %s\n" "${IGNORE_BREW}"
 
+# for devcontainers, it's best to install locally and anywhere
+# sudo is not required
+mkdir -p ~/bin
+
 ###
 # Rust
 ###
@@ -37,7 +41,7 @@ fi
 ###
 if [[ -z "$(which starship)" ]] ; then
     printf "\n🚀 Installing starship\n"
-    curl -fsSL https://starship.rs/install.sh | bash -s -- --yes
+    curl -fsSL https://starship.rs/install.sh | bash -s -- --yes -b ~/bin
 fi
 
 ###
