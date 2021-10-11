@@ -37,7 +37,7 @@ fi
 ###
 if [[ -z "$(which starship)" ]] ; then
     printf "\n🚀 Installing starship\n"
-    curl -fsSL https://starship.rs/install.sh | bash -s -- -y -b ${DOTFILES_BIN} >/dev/null
+    curl -fsSL https://starship.rs/install.sh | bash -s -- --yes
 fi
 
 ###
