@@ -29,7 +29,7 @@ fi
 ###
 if ! command -v 'antibody' &>/dev/null; then
     printf "\n🚀 Installing antibody\n"
-    curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
+    curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 fi
 
 ###
