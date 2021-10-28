@@ -29,7 +29,12 @@ function backup {
 }
 
 # Get the folder containing this script
-SCRIPT=$(readlink -f $0)
+SCRIPT=""
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    SCRIPT=$(greadlink -f $0)
+else
+    SCRIPT=$(readlink -f $0)
+fi
 BOOTSTRAP_SCRIPT_DIR=$(dirname ${SCRIPT})
 
 DOTFILES=${DOTFILES:-$HOME/.dotfiles}
