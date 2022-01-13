@@ -45,10 +45,18 @@ if [[ -z "$(which starship)" ]] ; then
 fi
 
 ###
+# Skim
+###
+if [[ -f "~/.skim/shell/completion.zsh" ]] ; then
+    printf "\n🚀 Installing skim\n"
+    git clone --quiet https://github.com/lotabout/skim.git ~/.skim
+fi
+
+###
 # Essential Rust utilities
 # For more utils, see rust-update.sh
 ###
-cargo install bat fd-find git-delta exa
+cargo install bat fd-find git-delta exa skim
 
 ###
 # Install oh my zsh

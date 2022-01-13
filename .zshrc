@@ -1,6 +1,14 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# export known env files
+set -o allexport
+if [ -f ~/.secrets ]
+then
+source ~/.secrets
+fi
+set +o allexport
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -73,13 +81,12 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+eval "$(starship init zsh)"
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -88,14 +95,35 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# Rust
+[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+export PATH="$HOME/.cargo/bin/:$PATH"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# direnv
+eval "$(direnv hook bash)"
+
+# wasm
+export WASMTIME_HOME="$HOME/.wasmtime"
+export PATH="$WASMTIME_HOME/bin:$PATH"
+
+# nix
+if [ -f /etc/profile.d/nix.sh ]
+then
+. /etc/profile.d/nix.sh
+fi
+
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# dotfile management
+alias dotfiles=`git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME`
+
+# skim
+source "$HOME/.skim/shell/completion.zsh"
+source "$HOME/.skim/shell/key-bindings.zsh"
+SKIM_DEFAULT_COMMAND="fd --type f --hidden --exclude '.git' || git ls-tree -r --name-only HEAD || rg --files || find ."
+# use bat as a previewer
+alias skvi='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi --preview="bat {} --color=always" --preview-window=right:60%:hidden)"; [[ $? -eq 0 ]] && vim "$x" || true }; f'
+# doing the same for VSCode
+alias skvs='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi --preview="bat {} --color=always" --preview-window=right:60%:hidden)"; [[ $? -eq 0 ]] && code :w "$x" || true }; f'
+
+eval "$(starship init zsh)"
