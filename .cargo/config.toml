@@ -1,0 +1,7 @@
+[net]
+git-fetch-with-cli = true
+
+[alias]
+b = "build"
+t = "test"
+
