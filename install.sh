@@ -28,13 +28,6 @@ if ! command -v 'rustc' &>/dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 
-###
-# Antibody
-###
-if ! command -v 'antibody' &>/dev/null; then
-    printf "\n🚀 Installing antibody\n"
-    curl -sfL git.io/antibody | sh -s -- -b ~/bin
-fi
 
 ###
 # Starship

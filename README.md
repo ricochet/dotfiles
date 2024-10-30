@@ -7,7 +7,7 @@ curl -fsSL https://raw.githubusercontent.com/ricochet/dotfiles/main/bootstrap | 
 
 - Dotfiles: use a bare git repository in the user's home (no symlinks).
 - OS: Debian/Ubuntu, MacOS, Windows with WSL
-- Shell: `zsh` wih [oh-my-zsh](https://ohmyz.sh) plugins managed by [antibody](https://getantibody.github.io/) and [starship](https://starship.rs) prompt
+- Shell: `zsh` wih [oh-my-zsh](https://ohmyz.sh) and [starship](https://starship.rs) prompt
 - Theme: Dracula
 - Text font: `Fira Code Mono`
 
@@ -43,10 +43,8 @@ See [rust/update.sh](./rust/update.sh) for installed cargo packages. Many are dr
 
 - `ls`: `exa` supports icons with the --icons flag.
 - `cat`: `bat` is a cat clone with syntax highlighting and Git integration that works on Windows, MacOS and Linux. It provides syntax highlighting for many file extensions by default.
-- `man`: `tealdeer`
 - `find`: `fd` is a fast and user-friendly alternative to find, the built-in command-line program in Unix/Linux for walking a file hierarchy. fd provides opinionated defaults for the most common use cases. To find a specific file by name, you write fd PATTERN instead of find -iname ‘*PATTERN*’. fd is also extremely fast and it comes with a ton of options like ignoring hidden directories, files and patterns from .gitignore by default. https://github.com/sharkdp/fd
 - `ps`: `procs` is a modern replacement for ps, the default command-line program in Unix/Linux for getting information about processes. It provides convenient, human-readable (and colored) output format by default.
-- `sed`: `sd` is an intuitive find & replace command-line tool, it is an alternative to sed, the built-in command-line program in Unix/Linux for parsing and transforming text. sd has simpler syntax for replacing all occurrences and it uses the convenient regex syntax that you already know from JavaScript and Python. sd is also 2x-11x faster than sed.
 - `du`: `dust` is a more intuitive version of du, the built-in command-line program in Unix/Linux for displaying disk usage statistics. By default dust sorts the directories by size.
 - `grep`: `rg`,  is an extremely fast alternative to grep, the built-in command-line program in Unix/Linux for searching files by pattern. ripgrep is a line-oriented search tool that recursively searches your current directory for a regex pattern. By default, ripgrep respects .gitignore and automatically skips hidden files, directories and binary files.
 - `tokei` tokei is a program that displays statistics about your code. It shows the number of files, total lines within those files and code, comments, and blanks grouped by language.

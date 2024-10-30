@@ -1,5 +1,16 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Extend $PATH without duplicates
+_extend_path() {
+  [[ -d "$1" ]] || return
+
+  if ! $( echo "$PATH" | tr ":" "\n" | grep -qx "$1" ) ; then
+    export PATH="$1:$PATH"
+  fi
+}
+
+_extend_path "$HOME/.local/bin"
+_extend_path "$HOME/bin"
+_extend_path "/usr/local/bin"
+_extend_path "/opt/homebrew/opt/make/libexec/gnubin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -10,67 +21,12 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git golang kubectl fd sudo)
+plugins=(git golang kubectl fd sudo nix-zsh-completions operator-sdk)
 
 source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
@@ -88,11 +44,11 @@ export LANG=en_US.UTF-8
 # fi
 
 # Go
-export PATH=$PATH:$(go env GOPATH)/bin
+_extend_path $(go env GOPATH)/bin
 
 # Rust
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
-export PATH="$HOME/.cargo/bin:$PATH"
+_extend_path "$HOME/.cargo/bin:$PATH"
 
 # direnv
 eval "$(direnv hook bash)"
@@ -100,18 +56,19 @@ eval "$(direnv hook bash)"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # dotfile management
-alias dotfiles=`git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME`
+alias dotfiles=`/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree="$HOME"`
 
 if command -v hidutil &> /dev/null
 then
    # map CAPS lock to tilda: tilde: 0x35, caps: 0x39\u
    # https://developer.apple.com/library/archive/technotes/tn2450/_index.html#//apple_ref/doc/uid/DTS40017618-CH1-KEY_TABLE_USAGES
-   hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000035}]}'
+   hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000035}]}' 1> /dev/null
 fi
 
 # GitHub
 export GITHUB_USER=ricochet
 
+# fzf
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git --color=always'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
@@ -125,20 +82,13 @@ alias skvi='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi --preview="bat {}
 # doing the same for VSCode
 alias skvs='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi --preview="bat {} --color=always" --preview-window=right:60%:hidden)"; [[ $? -eq 0 ]] && code :w "$x" || true }; f'
 
+# Like cd but with z-zsh capabilities
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
 # 1password 
 eval "$(op completion zsh)"; compdef _op op
-
-# cosmonic
-alias auth-multiverse="$HOME/bin/auth-multiverse.sh"
-
-# rancher desktop
-export PATH="$HOME/.rd/bin:$PATH"
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/vault vault
-complete -o nospace -C /opt/homebrew/bin/packer packer
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
-complete -o nospace -C /opt/homebrew/bin/nomad nomad
 
 # export known env files
 set -o allexport
@@ -148,10 +98,38 @@ source ~/.secrets
 fi
 set +o allexport
 
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-export PATH="/Users/bhayes/.cosmo/bin:${PATH}"
-export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:${PATH}"
+# VS Code
+_extend_path "/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin:${PATH}"
+alias codi="code-insiders"
+alias code="code-insiders"
 
 # wasm
-export WASMTIME_HOME="$HOME/.wasmtime"
-export PATH="$WASMTIME_HOME/bin:$PATH"
+export WASI_SDK_PATH="$HOME/local/wasi-sdk-20"
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# wash
+export WASH_EXPERIMENTAL=true
+
+# emscripten
+export EMSDK_QUIET=1
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/bhayes/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/bhayes/.local/share/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/bhayes/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/bhayes/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
+
+# bun completions
+[ -s "/Users/bhayes/.bun/_bun" ] && source "/Users/bhayes/.bun/_bun"
+
+# If the completion file doesn't exist yet, we need to autoload it and
+# bind it to `wasmtime`. Otherwise, compinit will have already done that.
+if [[ ! -f "$ZSH_CACHE_DIR/completions/_wasmtime" ]]; then
+  typeset -g -A _comps
+  autoload -Uz _wasmtime
+  _comps[wasmtime]=_wasmtime
+
+  wasmtime completion zsh >| "$ZSH_CACHE_DIR/completions/_wasmtime"
+fi
